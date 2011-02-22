@@ -12,6 +12,7 @@ class Migration(SchemaMigration):
         db.create_table('video_tracker_video', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=50, db_index=True)),
+            ('url', self.gf('django.db.models.fields.URLField')(max_length=200)),
         ))
         db.send_create_signal('video_tracker', ['Video'])
 
@@ -26,7 +27,8 @@ class Migration(SchemaMigration):
         'video_tracker.video': {
             'Meta': {'object_name': 'Video'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '50', 'db_index': 'True'})
+            'name': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '50', 'db_index': 'True'}),
+            'url': ('django.db.models.fields.URLField', [], {'max_length': '200'})
         }
     }
 
