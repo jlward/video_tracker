@@ -8,7 +8,7 @@ register = template.Library()
 @register.simple_tag
 def get_video_link(name, user):
     try:
-        video = Video.objects.filter(name=name)
+        video = Video.objects.get(name=name)
     except Video.DoesNotExist:
         return ''
     return '''
@@ -18,7 +18,7 @@ def get_video_link(name, user):
 @register.simple_tag
 def get_video(name, user):
     try:
-        video = Video.objects.filter(name=name)
+        video = Video.objects.get(name=name)
     except Video.DoesNotExist:
         return ''
     if user in video.users_viewed.all():
