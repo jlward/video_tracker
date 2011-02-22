@@ -4,7 +4,6 @@ from video_tracker.models import Video
 
 register = template.Library()
 
-#TODO Always dont show to guest user
 @register.simple_tag
 def get_video_link(name, user):
     try:
@@ -17,6 +16,9 @@ def get_video_link(name, user):
 
 @register.simple_tag
 def get_video(name, user):
+    # Dont show the pop up for guest users
+    if user.profile.is_guest:
+        return ''
     try:
         video = Video.objects.get(name=name)
     except Video.DoesNotExist:
