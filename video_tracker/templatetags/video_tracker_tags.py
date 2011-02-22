@@ -12,7 +12,7 @@ def get_video_link(name, user):
     except Video.DoesNotExist:
         return ''
     return '''
-	<a onclick="show_video(%s)" href="#">Watch Video</a> |
+	<a onclick="show_video('%s')" href="#">Watch Video</a> |
     ''' % video.url
 
 @register.simple_tag
