@@ -9,7 +9,7 @@ class Video(models.Model):
     users_viewed = models.ManyToManyField(User, null=True, db_table="user_have_viewed")
 
     def __unicode__(self):
-        return self.name
+        return self.name.replace('_', ' ').title()
 
     def add_user(self, user):
         self.users_viewed.add(user)
