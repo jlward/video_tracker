@@ -38,7 +38,7 @@ def get_video(name, user):
 def get_video_list(names):
     names = names.split(' ')
     videos = Video.objects.filter(name__in=names).order_by('name')
-    list_items = ','.join(['["%s", "%s"]' %(video.url, video) for video in videos])
+    list_items = ','.join(['["%s", "%s", "%s", "%s"]' % (video.url, video.thumbnail_url, video.title, video.description) for video in videos])
     if not videos.exists():
         return ''
     return '''

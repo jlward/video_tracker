@@ -12,6 +12,9 @@ class Migration(SchemaMigration):
         db.create_table('video_tracker_video', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=50, db_index=True)),
+            ('title', self.gf('django.db.models.fields.CharField')(max_length=255)),
+            ('description', self.gf('django.db.models.fields.CharField')(max_length=255)),
+            ('thumbnail_url', self.gf('django.db.models.fields.URLField')(max_length=200)),
             ('url', self.gf('django.db.models.fields.URLField')(max_length=200)),
         ))
         db.send_create_signal('video_tracker', ['Video'])
@@ -73,8 +76,11 @@ class Migration(SchemaMigration):
         },
         'video_tracker.video': {
             'Meta': {'object_name': 'Video'},
+            'description': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '50', 'db_index': 'True'}),
+            'thumbnail_url': ('django.db.models.fields.URLField', [], {'max_length': '200'}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'url': ('django.db.models.fields.URLField', [], {'max_length': '200'}),
             'users_viewed': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.User']", 'null': 'True', 'db_table': "'user_have_viewed'", 'symmetrical': 'False'})
         }
