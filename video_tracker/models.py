@@ -29,10 +29,19 @@ class Video(models.Model):
 
         data = json.loads(data)[0]
         post = data['Post']
-        Video.objects.create(
-            name=name,
-            title=post['title'],
-            description=post['description'].strip(' ;'),
-            thumbnail_url=post['thumbnail120Url'],
-            url=post['embedUrl'],
-        )
+        try:
+            video = Video.objects.get(name=name)
+        except Video.DoesNotExist:
+            Video.objects.create(
+                name=name,
+                title=post['title'],
+                description=post['description'].strip(' ;'),
+                thumbnail_url=post['thumbnail120Url'],
+                url=post['embedUrl'],
+            )
+        else:
+                video.title = post['title']
+                video.description = post['description'].strip(' ;')
+                video.thumbnail_url = post['thumbnail120Url']
+                video.url = post['embedUrl']
+                video.save()
